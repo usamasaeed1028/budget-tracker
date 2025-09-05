@@ -15,7 +15,7 @@ datasource db {
 }
 
 model UserSettings {
-  userId String @id
+  userId String @userId
   currency String
 }
 
@@ -57,14 +57,15 @@ model MonthHistory {
   @@id([day, month, year, userId])  
 }
 
-model YearHistory {
+model History {
   userId String 
+  day Int
   month Int
   year Int
   income Float
   expense Float
 
-  @@id([month, year, userId])  
+  @@id([day, month, year, userId])  
 }
 
 

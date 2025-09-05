@@ -17,18 +17,24 @@ import {
 import { Category } from "@/generated/prisma";
 import { TransactionType } from "@/lib/types";
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CreateCategoryDialog from "./CreateCategoryDialog";
-import { Check } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Props {
   type: TransactionType;
+  onChange: (value: string) => void;
 }
 
-const CategoryPicker = ({ type }: Props) => {
+const CategoryPicker = ({ type, onChange }: Props) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    if (!value) return;
+    onChange(value);
+  }, [onChange, value]);
 
   const categoriesQuery = useQuery<Category[]>({
     queryKey: ["categories", type],
@@ -39,7 +45,14 @@ const CategoryPicker = ({ type }: Props) => {
   const selectedCategory = categoriesQuery?.data?.find(
     (caterogry: Category) => caterogry.name === value
   );
-  console.log(selectedCategory, "hi");
+
+  const successCallback = useCallback(
+    (category: Category) => {
+      setValue(category.name);
+      setOpen((prev) => !prev);
+    },
+    [setValue, setOpen]
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -55,12 +68,16 @@ const CategoryPicker = ({ type }: Props) => {
           ) : (
             "Select Category"
           )}
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-2">
         <Command onSubmit={(e) => e.preventDefault()}>
           <CommandInput placeholder="Search Category..." />
-          <CreateCategoryDialog type={type} />
+          <CreateCategoryDialog
+            type={type}
+            onSuccessCallback={successCallback}
+          />
           <CommandEmpty>
             <p>Category not found!</p>
             <p className="text-xs text-muted-foreground">
@@ -74,13 +91,18 @@ const CategoryPicker = ({ type }: Props) => {
                   return (
                     <CommandItem
                       key={category.name}
-                      onSelect={(currentvalue) => {
+                      onSelect={() => {
                         setValue(category.name);
                         setOpen((prev) => !prev);
                       }}
                     >
                       <CategoryRow category={category} />
-                      <Check  className={cn("mr-2 w-4h-4 opacity-0",value === category.name && "opacity-100")}/>
+                      <Check
+                        className={cn(
+                          "mr-2 w-4h-4 opacity-0",
+                          value === category.name && "opacity-100"
+                        )}
+                      />
                     </CommandItem>
                   );
                 })}

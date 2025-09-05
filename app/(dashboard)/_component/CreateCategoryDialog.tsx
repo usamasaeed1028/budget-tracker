@@ -42,12 +42,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateCategory } from "../_actions/categories";
 import { Category } from "@/generated/prisma";
 import { toast } from "sonner";
+import { useTheme } from "next-themes";
 
 interface Props {
   type: TransactionType;
+  onSuccessCallback: (category: Category) => void;
 }
 
-const CreateCategoryDialog = ({ type }: Props) => {
+const CreateCategoryDialog = ({ type, onSuccessCallback }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm({
     resolver: zodResolver(CreateCategorySchema),
@@ -57,6 +59,7 @@ const CreateCategoryDialog = ({ type }: Props) => {
     },
   });
   const queryClient = useQueryClient();
+  const theme = useTheme();
 
   const { mutate, isPending } = useMutation({
     mutationFn: CreateCategory,
@@ -69,6 +72,7 @@ const CreateCategoryDialog = ({ type }: Props) => {
         queryKey: ["categories"],
       });
       setIsOpen((prev) => !prev);
+      onSuccessCallback(data);
     },
     onError: () => {
       toast.error(`Something went wrong!`, {
@@ -123,9 +127,11 @@ const CreateCategoryDialog = ({ type }: Props) => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input placeholder="Category" {...field} />
                   </FormControl>
-                  <FormDescription>Category Name (Required)</FormDescription>
+                  <FormDescription>
+                    This is how your category will appear in the app
+                  </FormDescription>
                 </FormItem>
               )}
             />
@@ -164,6 +170,7 @@ const CreateCategoryDialog = ({ type }: Props) => {
                       <PopoverContent className="w-full">
                         <Picker
                           data={data}
+                          theme={theme.resolvedTheme}
                           onEmojiSelect={(emoji: { native: string }) => {
                             field.onChange(emoji.native);
                           }}

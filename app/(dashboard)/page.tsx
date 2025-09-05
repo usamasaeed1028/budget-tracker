@@ -4,6 +4,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import React from "react";
 import CreateTransactionDialog from "./_component/CreateTransactionDialog";
+import Overview from "./_component/Overview";
 
 const page = async () => {
   const user = await currentUser();
@@ -28,7 +29,7 @@ const page = async () => {
               trigger={
                 <Button
                   variant="outline"
-                  className="cursor-pointer border-emerald-500 bg-emerald-950 hover:bg-emerald-700 hover:text-white"
+                  className="cursor-pointer border-emerald-500  hover:bg-emerald-700 hover:text-white"
                 >
                   New income
                 </Button>
@@ -39,7 +40,7 @@ const page = async () => {
               trigger={
                 <Button
                   variant="outline"
-                  className="cursor-pointer border-emerald-500 bg-emerald-950 hover:bg-emerald-700 hover:text-white"
+                  className="cursor-pointer border-emerald-500 hover:bg-emerald-700 hover:text-white"
                 >
                   New expense
                 </Button>
@@ -49,6 +50,7 @@ const page = async () => {
           </div>
         </div>
       </div>
+      <Overview userSettings={userSettings} />
     </div>
   );
 };
