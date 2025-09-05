@@ -85,7 +85,7 @@ const StatCard = ({
   return (
     <Card className="flex flex-row h-24 w-full items-center gap-2 p-4">
       <div>{icon}</div>
-      <div className="flex flex-col gap-0 items-center">
+      <div className="flex flex-col gap-0 justify-center">
         <p className="text-muted-foreground">{title}</p>
         <Countup
           preserveValue

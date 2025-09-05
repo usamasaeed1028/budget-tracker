@@ -78,7 +78,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
         id: "create-transaction",
       });
       await queryClient.invalidateQueries({
-        queryKey: ["transactions", "overview"],
+        queryKey: ["overview"],
         
       });
       setOpen((prev) => !prev);

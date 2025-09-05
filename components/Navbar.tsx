@@ -67,8 +67,8 @@ const MobileNavbar = () => {
 
 const DesktopNavbar = () => {
   return (
-    <div className="hidden border-seperate border-b bg-backgorund md:block">
-      <nav className="container flex  items-center justify-between px-8">
+    <div className="hidden border-seperate border-b bg-backgorund md:flex justify-center items-center">
+      <nav className="container flex  items-center justify-between px-0">
         <div className="flex h-[80px] min-h-[60px] items-center gap-x-4 justify-center">
           <Logo />
           <div className="flex h-full items-center gap-4">
