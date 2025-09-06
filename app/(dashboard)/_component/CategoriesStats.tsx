@@ -25,7 +25,6 @@ const CategoriesStats = ({
         `/api/stats/categories?from=${from.toDateString()}&to=${to.toISOString()}`
       ).then((res) => res.json()),
   });
-  console.log(statsQuery.data,"STATSQUERY")
 
   const formatter = useMemo(() => {
     return GetFormattedForCurrency(userSettings.currency);

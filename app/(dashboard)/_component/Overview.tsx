@@ -41,12 +41,14 @@ const Overview = ({ userSettings }: { userSettings: UserSettings }) => {
         </div>
         <StatsCards
           userSettings={userSettings}
-          from={dateRange.to}
+          from={dateRange.from}
           to={dateRange.to}
         />
-        <CategoriesStats  userSettings={userSettings}
-          from={dateRange.to}
-          to={dateRange.to} />
+        <CategoriesStats
+          userSettings={userSettings}
+          from={dateRange.from}
+          to={dateRange.to}
+        />
       </div>
     </>
   );

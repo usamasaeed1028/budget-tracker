@@ -22,7 +22,7 @@ const StatsCards = ({
     queryKey: ["overview", "stats", from, to],
     queryFn: () =>
       fetch(
-        `/api/stats/balance?from=${from.toDateString()}&to=${to.toISOString()}`
+        `/api/stats/balance?from=${from.toISOString()}&to=${to.toISOString()}`
       ).then((res) => res.json()),
   });
 
@@ -45,7 +45,7 @@ const StatsCards = ({
             <TrendingUp className="flex-shrink-0 h-12 w-12 rounded-lg p-2 text-emerald-500 bg-emerald-400/10" />
           }
         />
-          <StatCard
+        <StatCard
           formatter={formatter}
           value={income}
           title="Income"
@@ -53,7 +53,7 @@ const StatsCards = ({
             <TrendingDown className="flex-shrink-0 h-12 w-12 rounded-lg p-2 text-red-500 bg-emerald-400/10" />
           }
         />
-          <StatCard
+        <StatCard
           formatter={formatter}
           value={balance}
           title="Balance"
