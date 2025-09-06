@@ -47,9 +47,14 @@ import { useTheme } from "next-themes";
 interface Props {
   type: TransactionType;
   onSuccessCallback: (category: Category) => void;
+  customSyles?: boolean;
 }
 
-const CreateCategoryDialog = ({ type, onSuccessCallback }: Props) => {
+const CreateCategoryDialog = ({
+  type,
+  onSuccessCallback,
+  customSyles = false,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm({
     resolver: zodResolver(CreateCategorySchema),
@@ -92,13 +97,20 @@ const CreateCategoryDialog = ({ type, onSuccessCallback }: Props) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          className="flex border-separate items-center justify-start cursor-pointer rounded-none border-b p-3 text-muted-foregorund"
-        >
-          <PlusSquare className="mr-2 h-4 w-4" />
-          Create New
-        </Button>
+        {customSyles ? (
+          <Button className="gap-2 text-sm cursor-pointer">
+            <PlusSquare className="mr-2 h-4 w-4" />
+            Create New
+          </Button>
+        ) : (
+          <Button
+            variant="ghost"
+            className="flex border-separate items-center justify-start cursor-pointer rounded-none border-b p-3 text-muted-foregorund"
+          >
+            <PlusSquare className="mr-2 h-4 w-4" />
+            Create New
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
