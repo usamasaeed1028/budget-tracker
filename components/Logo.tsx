@@ -1,14 +1,15 @@
 import { PiggyBank } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Logo = () => {
   return (
-    <a href="/" className="flex items-center gap-2">
+    <Link href="/" className="flex items-center gap-2">
       <PiggyBank className="stroke h-11 w-11  stroke-amber-500 stroke-[1.5]" />
       <p className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-2xl md:text-3xl font-bold tracking-tighter text-transparent">
         BudgetTracker
       </p>
-    </a>
+    </Link>
   );
 };
 

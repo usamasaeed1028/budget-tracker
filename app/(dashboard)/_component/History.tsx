@@ -17,6 +17,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { TooltipProps } from "recharts";
+
 import CountUp from "react-countup";
 
 const History = ({ userSettings }: { userSettings: UserSettings }) => {
@@ -136,7 +138,10 @@ const History = ({ userSettings }: { userSettings: UserSettings }) => {
                   <Tooltip
                     cursor={{ opacity: 0.1 }}
                     content={(props) => (
-                      <CustomTooltip formatter={formatter} {...props} />
+                      <CustomTooltip
+                        formatter={formatter}
+                        {...(props as CustomTooltipProps)}
+                      />
                     )}
                   />
                 </BarChart>
@@ -159,7 +164,13 @@ const History = ({ userSettings }: { userSettings: UserSettings }) => {
 
 export default History;
 
-const CustomTooltip = ({ active, payload, formatter }: any) => {
+interface CustomTooltipProps extends TooltipProps<number, string> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  formatter?: any;
+}
+
+
+const CustomTooltip = ({ active, payload, formatter }: CustomTooltipProps) => {
   if (!active || !payload || payload.length === 0) return null;
 
   const data = payload[0].payload;

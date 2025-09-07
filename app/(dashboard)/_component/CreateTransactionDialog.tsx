@@ -42,7 +42,6 @@ import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateTransaction } from "../_actions/transactions";
-import { Transactions } from "@/generated/prisma";
 
 interface Props {
   trigger: ReactNode;
@@ -63,9 +62,13 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
   });
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: CreateTransaction as any,
-    onSuccess: async (data: Transactions) => {
+  const { mutate, isPending } = useMutation<
+    void,
+    unknown,
+    CreateTransactionSchemaType
+  >({
+    mutationFn: CreateTransaction,
+    onSuccess: async () => {
       form.reset({
         type,
         description: "",
@@ -92,7 +95,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
   const onSubmit = useCallback(
     (values: CreateTransactionSchemaType) => {
       toast.loading("Creating transaction....", { id: "create-transaction" });
-      mutate({ ...values as any });
+      mutate({ ...values });
     },
     [mutate]
   );
@@ -162,7 +165,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
               <FormField
                 control={form.control}
                 name="category"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
                     <FormControl>

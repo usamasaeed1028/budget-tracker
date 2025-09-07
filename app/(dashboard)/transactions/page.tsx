@@ -1,4 +1,5 @@
 "use client";
+
 import { DateRangePicker } from "@/components/ui/date-range-picker";
 import { MAX_DATE_RANGE_DAYS } from "@/lib/constants";
 import { differenceInDays, startOfMonth } from "date-fns";
@@ -6,7 +7,7 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import TransactionTable from "./_components/TransactionTable";
 
-const page = () => {
+const TransactionPage = () => {
   const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
     from: startOfMonth(new Date()),
     to: new Date(),
@@ -43,4 +44,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default TransactionPage;

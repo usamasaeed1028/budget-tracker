@@ -43,6 +43,7 @@ interface Props {
   from: Date;
   to: Date;
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const emptyData: any[] = [];
 
 type TransactionHistoryRow = GetTransactionsHistoryResponseType[0];
@@ -145,6 +146,7 @@ const TransactionTable = ({ from, to }: Props) => {
         `/api/transactions-history?from=${from.toISOString()}&to=${to.toISOString()}`
       ).then((res) => res.json()),
   });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleExportCSV = (data: any[]) => {
     const csv = generateCsv(csvConfig)(data);
     download(csvConfig)(csv);

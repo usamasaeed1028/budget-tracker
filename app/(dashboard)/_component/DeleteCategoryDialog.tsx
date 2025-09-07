@@ -48,7 +48,7 @@ const DeleteCategoryDialog = ({ category, trigger }: Props) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This acton can't be undone. This will permanently delete your
+            This acton cannot be undone. This will permanently delete your
             category!
           </AlertDialogDescription>
         </AlertDialogHeader>

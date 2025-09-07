@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { TransactionType } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { ReactNode, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,7 +38,7 @@ import { Button } from "@/components/ui/button";
 import { CircleOff, Loader2, PlusSquare } from "lucide-react";
 // import Picker from "@emoji-mart/react";
 // import data from "@emoji-mart/data";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateCategory } from "../_actions/categories";
 import { Category } from "@/generated/prisma";
@@ -189,8 +189,8 @@ const CreateCategoryDialog = ({
                           }}
                         /> */}
                         <EmojiPicker
-                          theme={theme.resolvedTheme as any}
-                          onEmojiClick={(emojiData) => {
+                          theme={theme.resolvedTheme as Theme}
+                          onEmojiClick={(emojiData: { emoji: string }) => {
                             field.onChange(emojiData.emoji);
                           }}
                         />
