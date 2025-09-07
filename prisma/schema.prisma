@@ -17,7 +17,7 @@ datasource db {
 }
 
 model UserSettings {
-  userId String @userId
+  userId   String @id
   currency String
 }
 
