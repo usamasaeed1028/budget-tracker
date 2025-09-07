@@ -12,6 +12,7 @@ export const dateToUTCDate = (date: Date) => {
       date.getMilliseconds()
     )
   );
+  
 };
 
 export const GetFormattedForCurrency = (currency: string) => {

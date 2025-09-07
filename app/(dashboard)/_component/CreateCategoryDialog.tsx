@@ -36,8 +36,9 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { CircleOff, Loader2, PlusSquare } from "lucide-react";
-import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
+// import Picker from "@emoji-mart/react";
+// import data from "@emoji-mart/data";
+import EmojiPicker from "emoji-picker-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateCategory } from "../_actions/categories";
 import { Category } from "@/generated/prisma";
@@ -180,11 +181,17 @@ const CreateCategoryDialog = ({
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent className="w-full">
-                        <Picker
+                        {/* <Picker
                           data={data}
                           theme={theme.resolvedTheme}
                           onEmojiSelect={(emoji: { native: string }) => {
                             field.onChange(emoji.native);
+                          }}
+                        /> */}
+                        <EmojiPicker
+                          theme={theme.resolvedTheme as any}
+                          onEmojiClick={(emojiData) => {
+                            field.onChange(emojiData.emoji);
                           }}
                         />
                       </PopoverContent>

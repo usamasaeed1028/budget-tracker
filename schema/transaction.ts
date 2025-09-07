@@ -12,3 +12,7 @@ export const CreateTransactionSchema = z.object({
 export type CreateTransactionSchemaType = z.infer<
   typeof CreateTransactionSchema
 >;
+
+export const DeleteTransactionSchema = z.object({
+  transactionId: z.string(),
+});
