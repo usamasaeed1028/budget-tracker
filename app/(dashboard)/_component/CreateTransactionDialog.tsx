@@ -43,7 +43,6 @@ import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateTransaction } from "../_actions/transactions";
 import { Transactions } from "@/generated/prisma";
-import { dateToUTCDate } from "@/lib/helpers";
 
 interface Props {
   trigger: ReactNode;
@@ -65,7 +64,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: CreateTransaction,
+    mutationFn: CreateTransaction as any,
     onSuccess: async (data: Transactions) => {
       form.reset({
         type,
@@ -79,7 +78,6 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
       });
       await queryClient.invalidateQueries({
         queryKey: ["overview"],
-        
       });
       setOpen((prev) => !prev);
     },
@@ -94,7 +92,7 @@ const CreateTransactionDialog = ({ trigger, type }: Props) => {
   const onSubmit = useCallback(
     (values: CreateTransactionSchemaType) => {
       toast.loading("Creating transaction....", { id: "create-transaction" });
-      mutate({ ...values });
+      mutate({ ...values as any });
     },
     [mutate]
   );

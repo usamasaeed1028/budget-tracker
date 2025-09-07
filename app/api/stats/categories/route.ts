@@ -27,6 +27,10 @@ export const GET = async (request: Request) => {
   return Response.json(stats);
 };
 
+export type GetCategoriesStatsResponseType = Awaited<
+  ReturnType<typeof getCategoriesStats>
+>;
+
 const getCategoriesStats = async (userId: string, from: Date, to: Date) => {
   const stats = await prisma.transactions.groupBy({
     by: ["type", "category", "categoryIcon"],
