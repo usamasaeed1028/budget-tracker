@@ -61,6 +61,7 @@ export function CurrencyComboBox() {
       );
     },
     onError: (e) => {
+      console.log(e, "ERROR ON SETTING CURRENCY!");
       toast.error("Something went wrong!", { id: "update-currency" });
     },
   });
