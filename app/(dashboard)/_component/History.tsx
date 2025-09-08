@@ -104,15 +104,19 @@ const History = ({ userSettings }: { userSettings: UserSettings }) => {
                     padding={{ left: 5, right: 5 }}
                     dataKey={(data) => {
                       const { year, month, day } = data;
-                      const date = new Date(year, month, day || 1);
                       if (timeframe === "year") {
-                        return date.toLocaleDateString("default", {
-                          month: "long",
-                        });
+                        return new Date(year, month).toLocaleDateString(
+                          "default",
+                          {
+                            month: "long",
+                          }
+                        );
                       }
-                      return date.toLocaleDateString("default", {
-                        day: "2-digit",
-                      });
+                      if (day) {
+                        return String(day).padStart(2, "0");
+                      }
+
+                      return "";
                     }}
                   />
                   <YAxis
@@ -168,7 +172,6 @@ interface CustomTooltipProps extends TooltipProps<number, string> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   formatter?: any;
 }
-
 
 const CustomTooltip = ({ active, payload, formatter }: CustomTooltipProps) => {
   if (!active || !payload || payload.length === 0) return null;

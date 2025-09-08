@@ -13,10 +13,10 @@ const TransactionPage = () => {
     to: new Date(),
   });
   return (
-    <div className="flex justify-center flex-col items-center">
+    <div className="flex justify-center flex-col items-center p-4">
       <div className="container flex flex-wrap items-center justify-between gap-6 py-8">
         <div className="flex items-center justify-between w-full">
-          <p className="text-3xl font-bold">Transactions history</p>
+          <p className="text-sm md:text-3xl font-bold">Transactions history</p>
           <DateRangePicker
             initialDateFrom={dateRange.from}
             initialDateTo={dateRange.to}

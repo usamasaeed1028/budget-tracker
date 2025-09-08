@@ -22,10 +22,10 @@ import DeleteCategoryDialog from "../_component/DeleteCategoryDialog";
 const page = () => {
   return (
     <>
-      <div className="border-b bg-card flex flex-col justify-center items-center">
+      <div className="border-b bg-card flex flex-col justify-center items-center p-4 m-4">
         <div className="container flex flex-wrap items-center justify-between gap-6 p-3">
           <div className="">
-            <p className="text-3xl font-bold">Manage</p>
+            <p className="text-sm md:text-3xl font-bold">Manage</p>
             <p className="text-muted-foreground">
               Manage your account settings and categories
             </p>
@@ -68,7 +68,7 @@ const CategoryList = ({ type }: { type: TransactionType }) => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center justify-between gap-2">
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col md:flex-row  gap-2 md:items-center">
               <div className="flex items-center gap-2">
                 {type === "expense" ? (
                   <TrendingDown className="h-12 w-12 rounded-lg bg-red-400/10 p-2 text-red-500" />
